@@ -109,6 +109,9 @@ void BigNumber::operator*=(const BigNumber &b)
         temp[j] = '\0';
 
 
+        /* remember it stores revert number in BigNumber object and
+         * the result, and when init a new BigNumber object we have to
+         * make it right.*/
         string res(j, ' ');
         for (int k = 0; k < j; k++)
             res[k] = temp[j - k - 1];
@@ -153,6 +156,7 @@ void BigNumber::operator-=(const BigNumber &b)
     
     number = temp;
     int j = number.length() - 1;
+    /* erase the head zero, store at the last */
     while (number[j] == '0' && j >= 0)
         j--;
     number.erase(j + 1);
@@ -161,6 +165,8 @@ void BigNumber::operator-=(const BigNumber &b)
     length = number.length();
 }
 
+/* store the result in *this
+ * and return the remainder.*/
 BigNumber BigNumber::operator/=(const BigNumber &b)
 {
     if (*this < b) {
